@@ -16,10 +16,10 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 # PHP                                                                                                                #
 ########################################################################################################################
 RUN mkdir -p /usr/share/man/man1 /usr/share/man/man7 /etc/xs4all  && \
-    apk add --update --no-cache --virtual .build-deps icu-dev jpeg-dev libjpeg-turbo-dev libpng-dev libzip-dev \
+    apk add --update --no-cache --virtual .build-deps icu-dev jpeg-dev libjpeg-turbo-dev libpng-dev libxml2-dev libzip-dev \
              postgresql-dev tzdata && \
     apk --no-cache add postgresql-client libpq libpng libjpeg icu-libs libzip tzdata bash curl && \
-    docker-php-ext-install bcmath exif gd intl mysqli opcache pcntl pdo pdo_mysql pdo_pgsql pgsql sockets zip && \
+    docker-php-ext-install bcmath exif gd intl mysqli opcache pcntl pdo pdo_mysql pdo_pgsql pgsql sockets zip soap && \
     apk del .build-deps && \
     rm -rf /usr/src && \
     mv "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"
